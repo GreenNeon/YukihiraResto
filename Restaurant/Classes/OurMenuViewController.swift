@@ -16,6 +16,7 @@ class OurMenuViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         menuItems = MenuItemsManager.sharedManager.loadData()
     }
     

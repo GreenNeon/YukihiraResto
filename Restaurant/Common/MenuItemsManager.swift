@@ -11,16 +11,14 @@ import UIKit
 class MenuItemsManager: NSObject {
     
     static let sharedManager = MenuItemsManager()
-    let datacenter = DataManager()
     
     private override init() {}
     
     // MARK: - Public Methods
     func loadData() -> [MenuItem] {
         let path = Bundle.main.path(forResource: "MenuItems", ofType: "plist")
-        let data = DataManager.init().MenuAll()
-        if data.count > 0{
-            return data
+        if let dataArray = NSArray(contentsOfFile: path!) {
+            return constructMenuItemsFromArray(array: dataArray)
         } else {
             return [MenuItem]()
         }

@@ -13,6 +13,8 @@ enum MenuItemType: Int {
     case Reservation
     case FindUs
     case Feedback
+    case Profile
+    case Logout
 }
 
 class LeftMenuViewController: UIViewController {
@@ -27,8 +29,8 @@ class LeftMenuViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
-        menuItems = ["OUR MENU","RESERVATION","FIND US","FEEDBACK"]
-        menuItemsImages = ["our_menu","reservation","find_us","feedback"]
+        menuItems = ["PROFILE","OUR MENU","RESERVATION","FIND US","FEEDBACK","LOG OUT"]
+        menuItemsImages = ["our_menu","reservation","find_us","feedback","feedback","feedback"]
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,7 +75,7 @@ extension LeftMenuViewController: UITableViewDelegate {
             break
         case MenuItemType.Feedback.rawValue:
             AppDelegate.sharedDelegate().openFeedback()
-            break
+            break            
         default:
             break
         }

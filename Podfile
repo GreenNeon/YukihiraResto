@@ -6,8 +6,8 @@ target 'Restaurant' do
   use_frameworks!
 
   # Pods for Restaurant
-	pod 'Alamofire', '~> 4.7'
-	pod 'SwiftyJSON', '~> 4.0'
+  pod 'Alamofire','~>4.7'
+
 end
 
 target 'RestaurantWidget' do
