@@ -13,15 +13,20 @@ class MenuItemsManager: NSObject {
     static let sharedManager = MenuItemsManager()
     
     private override init() {}
+    func createMenuItem(name: String, ingredients: String, image: String, price: String, discount: String) -> NSDictionary{
+        let obj: NSDictionary = [
+            "name": name,
+            "ingredients":ingredients,
+            "image": image,
+            "price": price,
+            "discount": discount
+        ]
+        return obj;
+    }
     
     // MARK: - Public Methods
     func loadData() -> [MenuItem] {
-        let path = Bundle.main.path(forResource: "MenuItems", ofType: "plist")
-        if let dataArray = NSArray(contentsOfFile: path!) {
-            return constructMenuItemsFromArray(array: dataArray)
-        } else {
-            return [MenuItem]()
-        }
+        return [MenuItem]()
     }
     
     // MARK: - Private Methods
@@ -29,6 +34,7 @@ class MenuItemsManager: NSObject {
         var resultItems = [MenuItem]()
         
         for object in array {
+            //object itu itemnya
             let obj = object as! NSDictionary
             let name = obj["name"] as! String
             let ingredients = obj["ingredients"] as! String

@@ -10,6 +10,7 @@ import UIKit
 
 class MenuItem: NSObject {
 
+    var id: Int
     var name: String
     var ingredients: String
     var image: String
@@ -22,5 +23,9 @@ class MenuItem: NSObject {
         self.image = image
         self.price = price
         self.discount = discount
+        self.id = -1
+    }
+    func changeId(id: Int){
+        self.id = id
     }
 }
