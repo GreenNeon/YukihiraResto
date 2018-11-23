@@ -17,7 +17,12 @@ class OurMenuViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        menuItems = MenuItemsManager.sharedManager.loadData()
+        menuItems = []
+        DataManager().DoFetchMakanan() { responseObject, error in
+            // use responseObject and error here
+            self.menuItems = responseObject!
+            self.tableView!.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,8 +41,7 @@ extension OurMenuViewController: UITableViewDataSource {
         cell.menuItemNameLabel?.text = item.name
         cell.ingredientsItemLabel?.text = item.ingredients
         cell.priceItemLabel?.text = item.price
-        cell.menuItemImageView?.image = UIImage(named: item.image)
-        
+        DataManager().downloadImage(from: URL(string: "http://platform.yafetrakan.com/images/"+item.image)!, view: cell.menuItemImageView!)
         if let discount = item.discount {
             cell.discountLabel?.text = discount
             cell.discountView?.isHidden = false

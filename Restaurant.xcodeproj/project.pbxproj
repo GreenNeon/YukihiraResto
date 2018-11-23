@@ -10,6 +10,8 @@
 		1A579EF8219E987400A3843C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A579EF7219E987400A3843C /* LoginViewController.swift */; };
 		1A579EFA219E9D9300A3843C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A579EF9219E9D9300A3843C /* RegisterViewController.swift */; };
 		4DF1D040C7B3AA554A564B0A /* Pods_RestaurantWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46769A03F52EEA33AE6DC835 /* Pods_RestaurantWidget.framework */; };
+		51DA17C421A82447006645AD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DA17C321A82447006645AD /* DataManager.swift */; };
+		51DA17C621A824CC006645AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DA17C521A824CC006645AD /* User.swift */; };
 		5721C8303265599235A1632E /* Pods_Restaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F850F1D38A4023E15D8B4CC /* Pods_Restaurant.framework */; };
 		BB0771531B9481EC006225A4 /* FindUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0771521B9481EC006225A4 /* FindUsViewController.swift */; };
 		BB0771581B9486AE006225A4 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0771561B9486AE006225A4 /* Appirater.m */; };
@@ -169,6 +171,8 @@
 		2F850F1D38A4023E15D8B4CC /* Pods_Restaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Restaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40AADAF34C05512FA7855FB8 /* Pods-RestaurantWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantWidget/Pods-RestaurantWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		46769A03F52EEA33AE6DC835 /* Pods_RestaurantWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51DA17C321A82447006645AD /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		51DA17C521A824CC006645AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		68AB7E0A8D2BED6E2BAE63A4 /* Pods-Restaurant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant.release.xcconfig"; path = "Pods/Target Support Files/Pods-Restaurant/Pods-Restaurant.release.xcconfig"; sourceTree = "<group>"; };
 		9A2E1B85908D122DB091B51B /* Pods-RestaurantWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantWidget/Pods-RestaurantWidget.release.xcconfig"; sourceTree = "<group>"; };
 		BB0771521B9481EC006225A4 /* FindUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUsViewController.swift; sourceTree = "<group>"; };
@@ -414,6 +418,7 @@
 				BB3D8E531B8F3CAC00C6F0C1 /* KeyboardListener.swift */,
 				BB3D8E6C1B8F53F100C6F0C1 /* FeedbacksManager.swift */,
 				BB3D8E6E1B8F545C00C6F0C1 /* MenuItemsManager.swift */,
+				51DA17C321A82447006645AD /* DataManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 			children = (
 				BB3D8E591B8F43DD00C6F0C1 /* MenuItem.swift */,
 				BB3D8E5B1B8F449700C6F0C1 /* Feedback.swift */,
+				51DA17C521A824CC006645AD /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -955,6 +961,7 @@
 				BB3D8E5A1B8F43DD00C6F0C1 /* MenuItem.swift in Sources */,
 				BB3D8E791B908BC100C6F0C1 /* FeedbackViewController.swift in Sources */,
 				BB3D8E541B8F3CAC00C6F0C1 /* KeyboardListener.swift in Sources */,
+				51DA17C621A824CC006645AD /* User.swift in Sources */,
 				BB3D8E6F1B8F545C00C6F0C1 /* MenuItemsManager.swift in Sources */,
 				BB3D8E771B9088EC00C6F0C1 /* ReservationViewController.swift in Sources */,
 				BB3D8E501B8F3BCD00C6F0C1 /* ConfigurationManager.swift in Sources */,
@@ -964,6 +971,7 @@
 				BB3D8E6B1B8F51D900C6F0C1 /* ReservationLocationTableViewCell.swift in Sources */,
 				BB0771581B9486AE006225A4 /* Appirater.m in Sources */,
 				BB3D8E5C1B8F449700C6F0C1 /* Feedback.swift in Sources */,
+				51DA17C421A82447006645AD /* DataManager.swift in Sources */,
 				BB3D8E5F1B8F478D00C6F0C1 /* FeedbackTableViewCell.swift in Sources */,
 				BB3D8E671B8F4D0600C6F0C1 /* NumberOfGuestsTableViewCell.swift in Sources */,
 				BB0771621B9486B5006225A4 /* MSViewControllerSlidingPanel.m in Sources */,
