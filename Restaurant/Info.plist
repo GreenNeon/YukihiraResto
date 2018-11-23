@@ -42,5 +42,10 @@
 		<string>KozGoPro-Medium.otf</string>
 		<string>KozGoPro-Light.otf</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
