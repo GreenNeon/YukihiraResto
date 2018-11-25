@@ -20,7 +20,7 @@ class OurMenuViewController: BaseViewController {
         menuItems = []
         DataManager().DoFetchMakanan() { responseObject, error in
             // use responseObject and error here
-            self.menuItems = responseObject!
+            self.menuItems = responseObject ?? [MenuItem]()
             self.tableView!.reloadData()
         }
     }

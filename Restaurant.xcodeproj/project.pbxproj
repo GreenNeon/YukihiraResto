@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0CFE8021AA950300205CC7 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0CFE7F21AA950300205CC7 /* Reservation.swift */; };
+		1A53E62121A87082001CD7D9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A53E62021A87082001CD7D9 /* ProfileViewController.swift */; };
 		1A579EF8219E987400A3843C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A579EF7219E987400A3843C /* LoginViewController.swift */; };
 		1A579EFA219E9D9300A3843C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A579EF9219E9D9300A3843C /* RegisterViewController.swift */; };
 		4DF1D040C7B3AA554A564B0A /* Pods_RestaurantWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46769A03F52EEA33AE6DC835 /* Pods_RestaurantWidget.framework */; };
@@ -165,6 +167,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A0CFE7F21AA950300205CC7 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		1A53E62021A87082001CD7D9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1A579EF7219E987400A3843C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1A579EF9219E9D9300A3843C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		26B5BDB9015C0753C7584DDF /* Pods-Restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Restaurant/Pods-Restaurant.debug.xcconfig"; sourceTree = "<group>"; };
@@ -407,6 +411,7 @@
 				BB0771521B9481EC006225A4 /* FindUsViewController.swift */,
 				1A579EF7219E987400A3843C /* LoginViewController.swift */,
 				1A579EF9219E9D9300A3843C /* RegisterViewController.swift */,
+				1A53E62021A87082001CD7D9 /* ProfileViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -447,6 +452,7 @@
 				BB3D8E591B8F43DD00C6F0C1 /* MenuItem.swift */,
 				BB3D8E5B1B8F449700C6F0C1 /* Feedback.swift */,
 				51DA17C521A824CC006645AD /* User.swift */,
+				1A0CFE7F21AA950300205CC7 /* Reservation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -965,6 +971,7 @@
 				BB3D8E6F1B8F545C00C6F0C1 /* MenuItemsManager.swift in Sources */,
 				BB3D8E771B9088EC00C6F0C1 /* ReservationViewController.swift in Sources */,
 				BB3D8E501B8F3BCD00C6F0C1 /* ConfigurationManager.swift in Sources */,
+				1A53E62121A87082001CD7D9 /* ProfileViewController.swift in Sources */,
 				BB3D8E691B8F516900C6F0C1 /* PhoneNumberTableViewCell.swift in Sources */,
 				BB3D8E6D1B8F53F100C6F0C1 /* FeedbacksManager.swift in Sources */,
 				BB9E343B1B8F2D6A00B0BB75 /* AppDelegate.swift in Sources */,
@@ -981,6 +988,7 @@
 				BB3D8E631B8F4C6F00C6F0C1 /* MenuItemTableViewCell.swift in Sources */,
 				BB3D8E651B8F4CCB00C6F0C1 /* MenuTableViewCell.swift in Sources */,
 				1A579EF8219E987400A3843C /* LoginViewController.swift in Sources */,
+				1A0CFE8021AA950300205CC7 /* Reservation.swift in Sources */,
 				BB0771531B9481EC006225A4 /* FindUsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

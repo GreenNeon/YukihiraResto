@@ -14,6 +14,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var Email: UITextField!
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var Nama: UITextField!
+    @IBOutlet weak var Telepon: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,27 +22,14 @@ class RegisterViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func alertwoy(msg: String){
-        var alert  = UIAlertController(title: "ALERT", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-        alert.addAction(ok)
-        present(alert, animated: true, completion: nil)
+    @IBAction func DoLogin(_ sender: Any) {
+        AppDelegate.sharedDelegate().openLogin()
     }
     @IBAction func DoRegister(_ sender: Any) {
-        let parameters: Parameters = [
-            "name": Nama.text,
-            "phone": 01991,
-            "email": Email.text,
-            "password": Password.text,
-            "checkpassword": Password.text
-            ]
-        Alamofire.request("http://platform.yafetrakan.com/api/users", method: .post, parameters: parameters).responseJSON { response in
-            debugPrint(response)
-            
-            if let json = response.result.value {
-                if json != nil {
-                    self.alertwoy(msg: "Berhasil Login!!");
-                }
+        DataManager().DoRegister(user: User(name: Nama.text!, email: Email.text!, password: Password.text!, phone: Telepon.text!, image: ""), view: self){
+            responseObject, error in
+            if error == nil {
+                AppDelegate.sharedDelegate().openLogin()
             }
         }
     }

@@ -59,12 +59,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         openControllerWithIndentifier(identifier: "reservationNavController")
     }
     
-    func openFindUs() {
-        openControllerWithIndentifier(identifier: "findUsNavController")
+    func openLogin() {
+        openControllerWithIndentifier(identifier: "loginNavView")
     }
     
-    func openFeedback() {
-        openControllerWithIndentifier(identifier: "feedbackNavController")
+    func openProfile() {
+        openControllerWithIndentifier(identifier: "profileNavController")
+    }
+    
+    func openReg() {
+        openControllerWithIndentifier(identifier: "regNavController")
     }
     
     // MARK: - Private Methods
