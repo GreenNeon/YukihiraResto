@@ -9,11 +9,11 @@
 import Foundation
 
 class Reservation {
-    var id: Int
-    var userId: Int
-    var jumlahOrang: Int
-    var tempat: String
-    var confirmed: Int
+    var id: Int = -1
+    var userId: Int = 0
+    var jumlahOrang: Int = 0
+    var tempat: String = ""
+    var confirmed: Int = 0
     
     init(id: Int, userId: Int, jumlahOrang: Int, tempat: String, confirmed: Int) {
         self.id = id
@@ -22,4 +22,15 @@ class Reservation {
         self.tempat = tempat
         self.confirmed = confirmed
     }
+    
+    func convert(id: Int, userId: String, jumlahOrang: String, tempat: String, confirmed: String) -> Reservation {
+        self.id = id
+        let usertest = Int(userId) ?? 0
+        self.userId = usertest
+        self.jumlahOrang = Int(jumlahOrang) ?? 0
+        self.tempat = tempat
+        self.confirmed = Int(confirmed) ?? 0
+        return self
+    }
+    
 }
