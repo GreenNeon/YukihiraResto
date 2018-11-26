@@ -22,6 +22,7 @@ class ReservationViewController: BaseViewController {
     var cellLocation: ReservationLocationTableViewCell?
     var cellGuest: NumberOfGuestsTableViewCell?
     var cellMake: MakeReservationTableViewCell?
+    let UserEdit: User = DataManager().LoadUser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,6 @@ class ReservationViewController: BaseViewController {
         cellGuest = self.tableView!.dequeueReusableCell(withIdentifier: "numberOfGuestsCell") as! NumberOfGuestsTableViewCell
         cellMake = self.tableView!.dequeueReusableCell(withIdentifier: "makeReservationCell") as! MakeReservationTableViewCell
         
-        let UserEdit: User = DataManager().LoadUser()
         DataManager().DoGetReservasi(id: UserEdit.id, view: self) {
             responseObject, error in
             
@@ -38,6 +38,7 @@ class ReservationViewController: BaseViewController {
             } else {
                 self.cellMake?.SetLabel(text: "EDIT RESERVATION")
             }
+            self.tableView?.reloadData()
         }
     }
     
@@ -79,8 +80,13 @@ extension ReservationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == ReservationCell.MakeReservation.rawValue {
-            let alert = UIAlertView(title: "Thank You", message: "You have booked table. Thanks for your reservation.", delegate: nil, cancelButtonTitle: "Ok")
-            alert.show()
+            if(UserEdit.id == -1) {
+                let alert = UIAlertView(title: "Thank You", message: "You have booked table. Thanks for your reservation.", delegate: nil, cancelButtonTitle: "Ok")
+                alert.show()
+            } else {
+                let alert = UIAlertView(title: "Nice", message: "You have update booked. Thanks for your time.", delegate: nil, cancelButtonTitle: "Ok")
+                alert.show()
+            }
         }
     }
 }
