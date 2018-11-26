@@ -19,9 +19,26 @@ enum ReservationCell: Int {
 class ReservationViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView?
+    var cellLocation: ReservationLocationTableViewCell?
+    var cellGuest: NumberOfGuestsTableViewCell?
+    var cellMake: MakeReservationTableViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cellLocation = self.tableView!.dequeueReusableCell(withIdentifier: "reservationCell") as! ReservationLocationTableViewCell
+        cellGuest = self.tableView!.dequeueReusableCell(withIdentifier: "numberOfGuestsCell") as! NumberOfGuestsTableViewCell
+        cellMake = self.tableView!.dequeueReusableCell(withIdentifier: "makeReservationCell") as! MakeReservationTableViewCell
+        
+        let UserEdit: User = DataManager().LoadUser()
+        DataManager().DoGetReservasi(id: UserEdit.id, view: self) {
+            responseObject, error in
+            
+            if(responseObject?.id == -1) {
+                self.cellMake?.SetLabel(text: "MAKE RESERVATION")
+            } else {
+                self.cellMake?.SetLabel(text: "EDIT RESERVATION")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,21 +56,18 @@ extension ReservationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case ReservationCell.Location.rawValue:
-            let cell: ReservationLocationTableViewCell = tableView.dequeueReusableCell(withIdentifier: "reservationCell") as! ReservationLocationTableViewCell
-            cell.backgroundColor = UIColor.clear
-            return cell
+            cellLocation!.backgroundColor = UIColor.clear
+            return cellLocation!
         case ReservationCell.NumberOfGuests.rawValue:
-            let cell: NumberOfGuestsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "numberOfGuestsCell") as! NumberOfGuestsTableViewCell
-            cell.backgroundColor = UIColor.clear
-            return cell
+            cellGuest!.backgroundColor = UIColor.clear
+            return cellGuest!
         case ReservationCell.Phone.rawValue:
             let cell: PhoneNumberTableViewCell = tableView.dequeueReusableCell(withIdentifier: "phoneNumberCell") as! PhoneNumberTableViewCell
             cell.backgroundColor = UIColor.clear
             return cell
         case ReservationCell.MakeReservation.rawValue:
-            let cell: MakeReservationTableViewCell = tableView.dequeueReusableCell(withIdentifier: "makeReservationCell") as! MakeReservationTableViewCell
-            cell.backgroundColor = UIColor.clear
-            return cell
+            cellMake!.backgroundColor = UIColor.clear
+            return cellMake!
         default:
             return UITableViewCell() //return empty cell
         }
