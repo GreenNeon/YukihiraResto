@@ -28,6 +28,11 @@ class NumberOfGuestsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func SetGuest(guest: Int) {
+        numberOfGuests = guest
+        updateNumberOfGuestsLabel()
+    }
+    
     // MARK: - Actions
     @IBAction func decreaseGuestsNumber(_ sender: AnyObject) {
         print("Decrease number of guests")

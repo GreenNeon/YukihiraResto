@@ -36,6 +36,15 @@ class ReservationViewController: BaseViewController {
             if(responseObject?.id == -1) {
                 self.cellMake?.SetLabel(text: "MAKE RESERVATION")
             } else {
+                
+                self.cellGuest?.SetGuest(guest: (responseObject?.jumlahOrang) ?? 0)
+                switch responseObject?.tempat {
+                case "Jakarta":
+                    self.cellLocation?.SetLocation(index: 1)
+                    break;
+                default:
+                    self.cellLocation?.SetLocation(index: 0)
+                }
                 self.cellMake?.SetLabel(text: "EDIT RESERVATION")
             }
             self.tableView?.reloadData()

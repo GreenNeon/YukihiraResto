@@ -12,6 +12,12 @@ class ReservationLocationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var locationLabel: UILabel?
     @IBOutlet weak var distanceLabel: UILabel?
+    let PlaceLocation: [String] = [
+        "Jalan Raya Bantul, KM 9\n(0812)123-0023\nBantul Suite,CC 8967",
+        "Jalan Kusuma Negara, KM 1\n(0812)123-0203\nBoshe Club,CC 9067",
+        "Jalan Solo KM 12\n(0812)123-1903\nJoga Club,CC 9067"
+    ]
+    var TableNum: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,12 +38,23 @@ class ReservationLocationTableViewCell: UITableViewCell {
         nextLocation()
     }
     
+    func SetLocation(index: Int) {
+        for n in 1...index {
+            print(n)
+            nextLocation()
+        }
+    }
+    
     @IBAction func onPreviosLocation(_ sender: AnyObject) {
         print("Previous location")
         previousLocation()
         
         distanceLabel?.text = "2,5 Mi"
-        locationLabel?.text = "21th St & Silent Rd\n(345)123-0987\nPhoenix,AZ 42200"
+        
+        if TableNum > 0 {
+            TableNum -= 1
+            locationLabel?.text = PlaceLocation[TableNum]
+        }
     }
     
     @IBAction func onNextLocation(_ sender: AnyObject) {
@@ -45,7 +62,10 @@ class ReservationLocationTableViewCell: UITableViewCell {
         nextLocation()
         
         distanceLabel?.text = "2,5 Mi"        
-        locationLabel?.text = "21th St & Silent Rd\n(345)123-0987\nPhoenix,AZ 42200"
+        if TableNum < 2 {
+            TableNum += 1
+            locationLabel?.text = PlaceLocation[TableNum]
+        }
     }
     
     // MARK: Private Methods
