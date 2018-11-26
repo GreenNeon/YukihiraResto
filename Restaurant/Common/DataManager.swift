@@ -135,7 +135,7 @@ class DataManager {
                     for menu in arrMenu {
                         let disMenu: [String: Any] = menu as! [String : Any]
                         var realMenu: MenuItem
-                        realMenu = MenuItem(name: disMenu["nama"] as! String, ingredients: disMenu["deskripsi"] as! String, image: disMenu["gambar"] as! String, price: disMenu["harga"] as! String, discount: disMenu["detail"] as! String)
+                        realMenu = MenuItem(name: disMenu["nama"] as! String, ingredients: disMenu["deskripsi"] as! String, image: disMenu["gambar"] as! String, price: disMenu["harga"] as! String, discount: disMenu["detail"] as? String)
                         realMenu.changeId(id: disMenu["id"] as! Int)
                         resultItems.append(realMenu)
                     }
@@ -232,18 +232,54 @@ class DataManager {
         }
     }
     
-    func DoReservasi(id: Int, reservation: Reservation, completionHandler: @escaping (Reservation?, Error?) -> ()) {
-        Reservasi(id: id, reservation: reservation, completionHandler: completionHandler)
+    func DoUpdateReservasi(id: Int, reservation: Reservation, completionHandler: @escaping (Reservation?, Error?) -> ()) {
+        UpdateReservasi(id: id, reservation: reservation, completionHandler: completionHandler)
     }
     
-    private func Reservasi(id: Int, reservation: Reservation, completionHandler: @escaping (Reservation?, Error?) -> ()) {
-        Alamofire.request("http://platform.yafetrakan.com/api/reservasi/\(id)", method: .get).responseJSON { response in
+    private func UpdateReservasi(id: Int, reservation: Reservation, completionHandler: @escaping (Reservation?, Error?) -> ()) {
+        
+        let parameters: Parameters = [
+            "jumlah_orang": reservation.jumlahOrang,
+            "tempat": reservation.tempat,
+            ]
+        
+        Alamofire.request("http://platform.yafetrakan.com/api/editreservasi/\(id)", method: .patch, parameters: parameters).responseJSON { response in
             switch response.result {
             case .success(let value):
                 if let json = value as? [String:Any]{
                     if let data = json["data"] as? [[String:Any]] {
                         let rdata = data[0]
-                        let reservation: Reservation = Reservation(id: rdata["id"] as? Int ?? -1, userId: rdata["userid"] as? Int ?? 0, jumlahOrang: rdata["jumlah_orang"] as? Int ?? 0, tempat: rdata["tempat"] as? String ?? "0", confirmed: rdata["confirmed"] as? Int ?? 0)
+                        let reservation: Reservation = Reservation(id: rdata["id"] as? Int ?? -1, userId: Int(rdata["userid"] as! String) ?? 0, jumlahOrang: Int(rdata["jumlah_orang"] as! String) ?? 0, tempat: rdata["tempat"] as? String ?? "0", confirmed: rdata["confirmed"] as? Int ?? 0)
+                        completionHandler(reservation, nil)
+                    } else {
+                        completionHandler(Reservation(id: -1, userId: 0, jumlahOrang: 0, tempat: "0", confirmed: 0), nil)
+                    }
+                }
+                
+            case .failure(let error):
+                completionHandler(nil, error)
+            }
+        }
+    }
+    
+    func DoReservasi(id: Int, reservation: Reservation, completionHandler: @escaping (Reservation?, Error?) -> ()) {
+        Reservasi(id: id, reservation: reservation, completionHandler: completionHandler)
+    }
+    
+    private func Reservasi(id: Int, reservation: Reservation, completionHandler: @escaping (Reservation?, Error?) -> ()) {
+        
+        let parameters: Parameters = [
+            "jumlah_orang": reservation.jumlahOrang,
+            "tempat": reservation.tempat,
+        ]
+        
+        Alamofire.request("http://platform.yafetrakan.com/api/reservasi/\(id)", method: .post, parameters: parameters).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                if let json = value as? [String:Any]{
+                    if let data = json["data"] as? [[String:Any]] {
+                        let rdata = data[0]
+                        let reservation: Reservation = Reservation(id: rdata["id"] as? Int ?? -1, userId: Int(rdata["userid"] as! String) ?? 0, jumlahOrang: Int(rdata["jumlah_orang"] as! String) ?? 0, tempat: rdata["tempat"] as? String ?? "0", confirmed: rdata["confirmed"] as? Int ?? 0)
                         completionHandler(reservation, nil)
                     } else {
                         completionHandler(Reservation(id: -1, userId: 0, jumlahOrang: 0, tempat: "0", confirmed: 0), nil)
@@ -265,11 +301,16 @@ class DataManager {
         Alamofire.request("http://platform.yafetrakan.com/api/showunconfirmed/\(id)", method: .get).responseJSON { response in
             switch response.result {
             case .success(let value):
+                print(value)
                 if let json = value as? [String:Any]{
                     if let data = json["data"] as? [[String:Any]] {
-                        let rdata = data[0]
-                        let reservation: Reservation = Reservation(id: rdata["id"] as? Int ?? -1, userId: rdata["userid"] as? Int ?? 0, jumlahOrang: rdata["jumlah_orang"] as? Int ?? 0, tempat: rdata["tempat"] as? String ?? "0", confirmed: rdata["confirmed"] as? Int ?? 0)
-                        completionHandler(reservation, nil)
+                        if data.count > 0 {
+                            let rdata = data[0]
+                            
+                            let reservation: Reservation = Reservation(id: rdata["id"] as? Int ?? -1, userId: Int(rdata["userid"] as! String) ?? 0, jumlahOrang: Int(rdata["jumlah_orang"] as! String) ?? 0, tempat: rdata["tempat"] as? String ?? "0", confirmed: rdata["confirmed"] as? Int ?? 0)
+                            completionHandler(reservation, nil)
+                        }
+            
                     } else {
                         completionHandler(Reservation(id: -1, userId: 0, jumlahOrang: 0, tempat: "0", confirmed: 0), nil)
                     }

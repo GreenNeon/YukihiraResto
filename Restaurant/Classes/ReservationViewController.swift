@@ -23,12 +23,13 @@ class ReservationViewController: BaseViewController {
     var cellGuest: NumberOfGuestsTableViewCell?
     var cellMake: MakeReservationTableViewCell?
     let UserEdit: User = DataManager().LoadUser()
+    var Editable: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cellLocation = self.tableView!.dequeueReusableCell(withIdentifier: "reservationCell") as! ReservationLocationTableViewCell
-        cellGuest = self.tableView!.dequeueReusableCell(withIdentifier: "numberOfGuestsCell") as! NumberOfGuestsTableViewCell
-        cellMake = self.tableView!.dequeueReusableCell(withIdentifier: "makeReservationCell") as! MakeReservationTableViewCell
+        cellLocation = self.tableView!.dequeueReusableCell(withIdentifier: "reservationCell") as? ReservationLocationTableViewCell
+        cellGuest = self.tableView!.dequeueReusableCell(withIdentifier: "numberOfGuestsCell") as? NumberOfGuestsTableViewCell
+        cellMake = self.tableView!.dequeueReusableCell(withIdentifier: "makeReservationCell") as? MakeReservationTableViewCell
         
         DataManager().DoGetReservasi(id: UserEdit.id, view: self) {
             responseObject, error in
@@ -37,11 +38,15 @@ class ReservationViewController: BaseViewController {
                 self.cellMake?.SetLabel(text: "MAKE RESERVATION")
             } else {
                 
+                self.Editable = true
                 self.cellGuest?.SetGuest(guest: (responseObject?.jumlahOrang) ?? 0)
                 switch responseObject?.tempat {
-                case "Jakarta":
+                case "bantul":
+                    self.cellLocation?.SetLocation(index: 0)
+                case "boshe":
                     self.cellLocation?.SetLocation(index: 1)
-                    break;
+                case "jogja":
+                    self.cellLocation?.SetLocation(index: 2)
                 default:
                     self.cellLocation?.SetLocation(index: 0)
                 }
@@ -89,12 +94,56 @@ extension ReservationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == ReservationCell.MakeReservation.rawValue {
-            if(UserEdit.id == -1) {
+            if(!Editable) {
+                
                 let alert = UIAlertView(title: "Thank You", message: "You have booked table. Thanks for your reservation.", delegate: nil, cancelButtonTitle: "Ok")
-                alert.show()
+                
+                var tempat = "jogja"
+                switch cellLocation?.TableNum {
+                case 0 :
+                    tempat = "bantul"
+                case 1:
+                    tempat = "boshe"
+                case 2:
+                    tempat = "jogja"
+                case .none:
+                    tempat = "bantul"
+                case .some(_):
+                    tempat = "bantul"
+                }
+                
+                let reservation: Reservation = Reservation(id: 0, userId: 0, jumlahOrang: (cellGuest?.numberOfGuests)!, tempat: tempat, confirmed: 0)
+            
+                DataManager().DoReservasi(id: UserEdit.id, reservation: reservation) {
+                    responseObject, error in
+                    
+                    alert.show()
+                }
+                
             } else {
                 let alert = UIAlertView(title: "Nice", message: "You have update booked. Thanks for your time.", delegate: nil, cancelButtonTitle: "Ok")
-                alert.show()
+                
+                var tempat = "jogja"
+                switch cellLocation?.TableNum {
+                case 0 :
+                    tempat = "bantul"
+                case 1:
+                    tempat = "boshe"
+                case 2:
+                    tempat = "jogja"
+                case .none:
+                    tempat = "bantul"
+                case .some(_):
+                    tempat = "bantul"
+                }
+                
+                let reservation: Reservation = Reservation(id: 0, userId: 0, jumlahOrang: (cellGuest?.numberOfGuests)!, tempat: tempat, confirmed: 0)
+                
+                DataManager().DoUpdateReservasi(id: UserEdit.id, reservation: reservation) {
+                    responseObject, error in
+                    
+                    alert.show()
+                }
             }
         }
     }

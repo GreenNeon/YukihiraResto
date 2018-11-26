@@ -39,7 +39,7 @@ class ReservationLocationTableViewCell: UITableViewCell {
     }
     
     func SetLocation(index: Int) {
-        for n in 1...index {
+        for n in 0...index {
             print(n)
             nextLocation()
         }
@@ -51,27 +51,24 @@ class ReservationLocationTableViewCell: UITableViewCell {
         
         distanceLabel?.text = "2,5 Mi"
         
-        if TableNum > 0 {
-            TableNum -= 1
-            locationLabel?.text = PlaceLocation[TableNum]
-        }
     }
     
     @IBAction func onNextLocation(_ sender: AnyObject) {
         print("Next location")
         nextLocation()
         
-        distanceLabel?.text = "2,5 Mi"        
-        if TableNum < 2 {
-            TableNum += 1
-            locationLabel?.text = PlaceLocation[TableNum]
-        }
+        distanceLabel?.text = "2,5 Mi"
     }
     
     // MARK: Private Methods
     private func previousLocation() {
         UIView.animate(withDuration: 0.2) { () -> Void in
             self.locationLabel?.alpha = 0.0
+        }
+        
+        if TableNum > 0 {
+            TableNum -= 1
+            locationLabel?.text = PlaceLocation[TableNum]
         }
         
         UIView.animate(withDuration: 0.1) { () -> Void in
@@ -82,6 +79,11 @@ class ReservationLocationTableViewCell: UITableViewCell {
     private func nextLocation() {
         UIView.animate(withDuration: 0.2) { () -> Void in
             self.locationLabel?.alpha = 0.0
+        }
+        
+        if TableNum < 2 {
+            TableNum += 1
+            locationLabel?.text = PlaceLocation[TableNum]
         }
         
         UIView.animate(withDuration: 0.1) { () -> Void in
