@@ -241,8 +241,9 @@ class DataManager {
             switch response.result {
             case .success(let value):
                 if let json = value as? [String:Any]{
-                    if let data = json["data"] as? [String:Any] {
-                        let reservation: Reservation = Reservation(id: (data["id"] as? Int)!, userId: (data["userid"] as? Int)!, jumlahOrang: (data["jumlah_orang"] as? Int)!, tempat: (data["tempat"] as? String)!, confirmed: ("confirmed" as? Int)!)
+                    if let data = json["data"] as? [[String:Any]] {
+                        let rdata = data[0]
+                        let reservation: Reservation = Reservation(id: rdata["id"] as? Int ?? -1, userId: rdata["userid"] as? Int ?? 0, jumlahOrang: rdata["jumlah_orang"] as? Int ?? 0, tempat: rdata["tempat"] as? String ?? "0", confirmed: rdata["confirmed"] as? Int ?? 0)
                         completionHandler(reservation, nil)
                     } else {
                         completionHandler(Reservation(id: -1, userId: 0, jumlahOrang: 0, tempat: "0", confirmed: 0), nil)
@@ -265,8 +266,9 @@ class DataManager {
             switch response.result {
             case .success(let value):
                 if let json = value as? [String:Any]{
-                    if let data = json["data"] as? [String:Any] {
-                        let reservation: Reservation = Reservation(id: (data["id"] as? Int)!, userId: (data["userid"] as? Int)!, jumlahOrang: (data["jumlah_orang"] as? Int)!, tempat: (data["tempat"] as? String)!, confirmed: ("confirmed" as? Int)!)
+                    if let data = json["data"] as? [[String:Any]] {
+                        let rdata = data[0]
+                        let reservation: Reservation = Reservation(id: rdata["id"] as? Int ?? -1, userId: rdata["userid"] as? Int ?? 0, jumlahOrang: rdata["jumlah_orang"] as? Int ?? 0, tempat: rdata["tempat"] as? String ?? "0", confirmed: rdata["confirmed"] as? Int ?? 0)
                         completionHandler(reservation, nil)
                     } else {
                         completionHandler(Reservation(id: -1, userId: 0, jumlahOrang: 0, tempat: "0", confirmed: 0), nil)
